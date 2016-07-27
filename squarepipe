@@ -1,0 +1,22 @@
+// Gmsh project created on Tue Jul 26 09:05:04 2016
+r = 0.2;
+ce = 0;
+pts[]={};
+nearg = r/20;
+Point(ce++) = {r,0,0,nearg};pts[]+=ce;
+Point(ce++) = {r,r,0,nearg};pts[]+=ce;
+Point(ce++) = {0,r,0,nearg};pts[]+=ce;
+Point(ce++) = {0,-0,0,nearg};pts[]+=ce;
+Line(1) = {4, 1};
+Line(2) = {1, 2};
+Line(3) = {2, 3};
+Line(4) = {3, 4};
+Line Loop(5) = {3, 4, 1, 2};
+Plane Surface(6) = {5};
+Transfinite Surface {6};
+Recombine Surface {6};
+Extrude {0, 0, -8} {
+  Surface{6};
+  Layers{20};
+  Recombine;
+}

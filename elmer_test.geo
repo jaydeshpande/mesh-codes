@@ -1,0 +1,36 @@
+width = 0.2;
+height = 0.2;
+space = 0.4;
+room = space+space+width;
+nearg = 0.01;
+extremeg = 0.05;
+ce = 0; // counter for the number of points
+pts[] = {}; // array to store all the points and their point numbers
+Point(ce++) = {0,0,0,extremeg};pts[]+=ce;
+Point(ce++) = {space,0,0,nearg};pts[]+=ce;
+Point(ce++) = {space+width,0,0,nearg};pts[]+=ce;
+Point(ce++) = {room,0,0,extremeg};pts[]+=ce;
+Point(ce++) = {room,room,0,extremeg};pts[]+=ce;
+Point(ce++) = {0,room,0,extremeg};pts[]+=ce;
+Point(ce++) = {space,height,0,nearg};pts[]+=ce;
+Point(ce++) = {space+width,height,0,nearg};pts[]+=ce;
+Line(1) = {1, 2};
+Line(2) = {2, 3};
+Line(3) = {3, 4};
+Line(4) = {4, 5};
+Line(5) = {5, 6};
+Line(6) = {6, 1};
+Line(7) = {2, 7};
+Line(8) = {7, 8};
+Line(9) = {8, 3};
+Line Loop(10) = {7, 8, 9, -2};
+Plane Surface(11) = {10};
+Line Loop(12) = {1, 7, 8, 9, 3, 4, 5, 6};
+Plane Surface(13) = {12};
+Transfinite Surface {11};
+Recombine Surface {11};
+Physical Surface("air") = {13};
+Physical Surface("solid") = {11};
+Physical Line("top") = {5};
+Physical Line("bottom") = {1, 3};
+Physical Line("sides") = {6, 4};
